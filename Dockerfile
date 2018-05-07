@@ -16,7 +16,14 @@ RUN curl -fSL "http://it.apache.contactlab.it/hadoop/common/hadoop-$HADOOP_VERSI
     && rm -Rf /opt/hadoop-$HADOOP_VERSION/share/doc/hadoop
 
 ENV HADOOP_HOME=/opt/hadoop-$HADOOP_VERSION
-ENV HADOOP_CONF_DIR=/etc/hadoop
+ENV HADOOP_MAPRED_HOME=$HADOOP_HOME
+ENV HADOOP_COMMON_HOME=$HADOOP_HOME
+ENV HADOOP_HDFS_HOME=$HADOOP_HOME
+ENV YARN_HOME=$HADOOP_HOME
+ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+ENV YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+ENV PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod a+x /entrypoint.sh
