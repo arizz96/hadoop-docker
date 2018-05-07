@@ -10,6 +10,10 @@ rm -r /root/.ssh
 mkdir /root/.ssh
 echo $HADOOP_SSH_KEY | sed -r 's/\\n/\n/g' >> /root/.ssh/id_rsa
 echo $HADOOP_SSH_PUB_KEY | sed -r 's/\\n/\n/g' >> /root/.ssh/id_rsa.pub
+chmod 600 -R /root/.ssh
+chmod 700 /root/.ssh
+cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+service sshd restart
 
 function addProperty() {
   local path=$1
