@@ -60,6 +60,7 @@ configure $HADOOP_CONF_DIR/hdfs-site.xml hdfs HDFS_CONF
 configure $HADOOP_CONF_DIR/yarn-site.xml yarn YARN_CONF
 configure $HADOOP_CONF_DIR/httpfs-site.xml httpfs HTTPFS_CONF
 configure $HADOOP_CONF_DIR/kms-site.xml kms KMS_CONF
+configure $HADOOP_CONF_DIR/mapred-site.xml kms MAPRED_CONF
 
 # start node
 if [[ ${HADOOP_ROLE,,} = namenode ]]; then
