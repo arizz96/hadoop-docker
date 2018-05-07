@@ -65,6 +65,8 @@ configure $HADOOP_CONF_DIR/mapred-site.xml kms MAPRED_CONF
 # start node
 if [[ ${HADOOP_ROLE,,} = namenode ]]; then
     $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR namenode
+elif [[ ${HADOOP_ROLE,,} = namenode_standby ]]; then
+    $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR namenode -bootstrapStandby
 elif [[ ${HADOOP_ROLE,,} = datanode ]]; then
     $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR datanode
 elif [[ ${HADOOP_ROLE,,} = journalnode ]]; then
