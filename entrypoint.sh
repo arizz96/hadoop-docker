@@ -1,6 +1,6 @@
 #!/bin/bash
 
-: ${HADOOP_ROLE:?"HADOOP_ROLE is required and should be namenode, datanode or journal."}
+: ${HADOOP_ROLE:?"HADOOP_ROLE is required and should be one of: namenode, datanode, journalnode, resourcemanager, nodemanager, proxyserver or historyserver."}
 
 # Set some sensible defaults
 export CORE_CONF_fs_defaultFS=${CORE_CONF_fs_defaultFS:-hdfs://`hostname -f`:8020}
@@ -64,12 +64,20 @@ configure $HADOOP_CONF_DIR/mapred-site.xml kms MAPRED_CONF
 
 # start node
 if [[ ${HADOOP_ROLE,,} = namenode ]]; then
-    source roles/namenode.sh
+    $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR start namenode
 elif [[ ${HADOOP_ROLE,,} = datanode ]]; then
-    source roles/datanode.sh
+    $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR start datanode
 elif [[ ${HADOOP_ROLE,,} = journalnode ]]; then
-    source roles/journalnode.sh
+    $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR start journalnode
+elif [[ ${HADOOP_ROLE,,} = resourcemanager ]]; then
+    $HADOOP_HOME/bin/yarn --config $HADOOP_CONF_DIR start resourcemanager
+elif [[ ${HADOOP_ROLE,,} = nodemanager ]]; then
+    $HADOOP_HOME/bin/yarn --config $HADOOP_CONF_DIR start nodemanager
+elif [[ ${HADOOP_ROLE,,} = proxyserver ]]; then
+    $HADOOP_HOME/bin/yarn --config $HADOOP_CONF_DIR start proxyserver
+elif [[ ${HADOOP_ROLE,,} = historyserver ]]; then
+    $HADOOP_HOME/bin/mapred --config $HADOOP_CONF_DIR start historyserver
 else
-    echo "HADOOP_ROLE's value must be one of: namenode, datanode or journalnode"
+    echo "HADOOP_ROLE's value must be one of: namenode, datanode, journalnode, resourcemanager, nodemanager, proxyserver or historyserver."
     exit 1
 fi
