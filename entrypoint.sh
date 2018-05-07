@@ -64,19 +64,19 @@ configure $HADOOP_CONF_DIR/mapred-site.xml kms MAPRED_CONF
 
 # start node
 if [[ ${HADOOP_ROLE,,} = namenode ]]; then
-    $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR start namenode
+    $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR namenode
 elif [[ ${HADOOP_ROLE,,} = datanode ]]; then
-    $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR start datanode
+    $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR datanode
 elif [[ ${HADOOP_ROLE,,} = journalnode ]]; then
-    $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR start journalnode
+    $HADOOP_HOME/bin/hdfs --config $HADOOP_CONF_DIR journalnode
 elif [[ ${HADOOP_ROLE,,} = resourcemanager ]]; then
-    $HADOOP_HOME/bin/yarn --config $HADOOP_CONF_DIR start resourcemanager
+    $HADOOP_HOME/bin/yarn --config $HADOOP_CONF_DIR resourcemanager
 elif [[ ${HADOOP_ROLE,,} = nodemanager ]]; then
-    $HADOOP_HOME/bin/yarn --config $HADOOP_CONF_DIR start nodemanager
+    $HADOOP_HOME/bin/yarn --config $HADOOP_CONF_DIR nodemanager
 elif [[ ${HADOOP_ROLE,,} = proxyserver ]]; then
-    $HADOOP_HOME/bin/yarn --config $HADOOP_CONF_DIR start proxyserver
+    $HADOOP_HOME/bin/yarn --config $HADOOP_CONF_DIR proxyserver
 elif [[ ${HADOOP_ROLE,,} = historyserver ]]; then
-    $HADOOP_HOME/bin/mapred --config $HADOOP_CONF_DIR start historyserver
+    $HADOOP_HOME/bin/mapred --config $HADOOP_CONF_DIR historyserver
 else
     echo "HADOOP_ROLE's value must be one of: namenode, datanode, journalnode, resourcemanager, nodemanager, proxyserver or historyserver."
     exit 1
