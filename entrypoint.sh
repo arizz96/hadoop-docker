@@ -5,6 +5,12 @@
 # Set some sensible defaults
 export CORE_CONF_fs_defaultFS=${CORE_CONF_fs_defaultFS:-hdfs://`hostname -f`:8020}
 
+# Setup SSH keys
+rm -r /root/.ssh
+mkdir /root/.ssh
+echo $HADOOP_SSH_KEY | sed -r 's/\\n/\n/g' >> /root/.ssh/id_rsa
+echo $HADOOP_SSH_PUB_KEY | sed -r 's/\\n/\n/g' >> /root/.ssh/id_rsa.pub
+
 function addProperty() {
   local path=$1
   local name=$2
