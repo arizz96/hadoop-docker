@@ -1,5 +1,5 @@
 FROM java:openjdk-8u111-jdk
-RUN apt-get update -qq && apt-get install -y build-essential software-properties-common build-essential pkg-config xmlstarlet
+RUN apt-get update -qq && apt-get install -y build-essential software-properties-common build-essential pkg-config xmlstarlet openssh-server
 
 # Hadoop installation
 RUN curl -fSL "http://www-eu.apache.org/dist/hadoop/common/KEYS" -o /tmp/KEYS \
