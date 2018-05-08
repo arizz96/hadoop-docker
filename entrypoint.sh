@@ -8,8 +8,8 @@ export CORE_CONF_fs_defaultFS=${CORE_CONF_fs_defaultFS:-hdfs://`hostname -f`:802
 # Setup SSH keys
 rm -r /root/.ssh || true
 mkdir /root/.ssh
-echo $HADOOP_SSH_KEY | sed -r 's/\\n/\n/g' >> /root/.ssh/id_rsa
-echo $HADOOP_SSH_PUB_KEY | sed -r 's/\\n/\n/g' >> /root/.ssh/id_rsa.pub
+echo $HADOOP_SSH_KEY | sed -r 's/\\n\s/\n/g' >> /root/.ssh/id_rsa
+echo $HADOOP_SSH_PUB_KEY | sed -r 's/\\n\s/\n/g' >> /root/.ssh/id_rsa.pub
 chmod 600 -R /root/.ssh
 chmod 700 /root/.ssh
 cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
